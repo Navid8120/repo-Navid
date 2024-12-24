@@ -1,15 +1,22 @@
-resource "aws_instance" "nginx_instance" {
-  ami           = "ami-053b12d3152c0cc71" # Ubuntu 22.04 AMI for ap-south-1
+resource "aws_instance" "nginx_server" {
+  ami           = "ami-053b12d3152c0cc71" # Replace with a valid Ubuntu 22 AMI ID for ap-south-1
   instance_type = var.instance_type
-  security_groups = [aws_security_group.nginx_sg.name]
+  key_name      = "your-key-name"
 
   root_block_device {
     volume_size = var.disk_size
   }
 
-  user_data = file("userdata.sh") # Shell script for Nginx setup
-
   tags = {
-    Name = "nginx-instance"
+    Name = "NginxServer"
   }
+
+  user_data = <<-EOT
+    #!/bin/bash
+    apt update -y
+    apt install nginx -y
+    systemctl enable nginx
+    systemctl start nginx
+  EOT
 }
+
