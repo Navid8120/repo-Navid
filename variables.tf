@@ -14,9 +14,11 @@ variable "allowed_ports" {
 }
 
 variable "aws_access_key_id" {
-  description = "AKIAYXWBOF2RHOU2XI4W"
+  description = "AWS Access Key ID"
+  type        = string
 }
 
 variable "aws_secret_access_key" {
-  description = "O7pGrI7zYzQje4PW9ydD1hDe97ppluyMVqS12F7K"
+  description = "AWS Secret Access Key"
+  type        = string
 }
